@@ -1,0 +1,3 @@
+= Apicurio - Red Hat Single Sign On - Bitbucket
+
+image::images/components-diagram.png[]
