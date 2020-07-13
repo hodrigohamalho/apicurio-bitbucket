@@ -1,3 +1,62 @@
 = Apicurio - Red Hat Single Sign On - Bitbucket
 
 image::images/components-diagram.png[]
+
+== Bitbucket 
+
+http://bitbucket-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com[Admin Console]
+
+Not only Bitbucket but also the additional plugins requires license, you can enable trial by the atlassian portal. 
+
+Install Bitbucket directly using the image `docker.io/atlassian/bitbucket-server/`
+
+Create a PVC and set to the container, so your configurations can survive to restarts. 
+
+    oc set volume deployment/bitbucket --add --name=bitbucket-1 --type=persistentVolumeClaim --claim-name=bitbucket --mount-path=/var/atlassian/application-data/bitbucket
+
+http://bitbucket-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/plugins/servlet/oidc/emdisable?secret=udwujfiu6ch6gukqkuje6ssgwps7tq[Emergency Access]
+
+Credentials
+
+    username: rramalho
+    password: redhat
+
+Login via RHSSO 
+
+    username: rodrigo
+    password: redhat
+
+=== Plugins
+
+. Bitbucket Enterprise SSO with Keycloak 
+
+image::images/components-diagram.png[]
+
+
+== Install the RHSSO 7.3 from the official templates
+
+Credentials:
+
+    username: redhat
+    password: redhat
+
+RHSSO useful informations 
+
+    https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/.well-known/openid-configuration
+    auth url: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/auth
+    token_endpoint: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/token
+    logout url: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/logout
+    user_info https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/userinfo
+
+== Apicurio 
+
+. First install the PostgreSQL 
+. After istall the Apicurio template `apicurio-template.yml`
+
+Remember to point to the Postgres and RHSSO already Installed. 
+
+== Environment Access 
+
+http://console-openshift-console.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com[Openshift]
+
+All resources is on the project `apicurio`.
