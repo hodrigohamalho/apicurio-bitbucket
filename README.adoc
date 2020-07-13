@@ -35,6 +35,8 @@ image::images/components-diagram.png[]
 
 == Install the RHSSO 7.3 from the official templates
 
+https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/[Admin Console]
+
 Credentials:
 
     username: redhat
