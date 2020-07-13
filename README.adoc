@@ -30,7 +30,7 @@ Login via RHSSO
 
 . Bitbucket Enterprise SSO with Keycloak 
 
-image::images/components-diagram.png[]
+image::images/bitbucket-keycloak-plugin.png[]
 
 
 == Install the RHSSO 7.3 from the official templates
