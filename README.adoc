@@ -2,9 +2,13 @@
 
 image::images/components-diagram.png[]
 
+https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com[RHSSO]
+http://bitbucket-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com[BITBUCKET]
+https://apicurio-studio.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com[APICURIO]
+
 == Bitbucket 
 
-http://bitbucket-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com[Admin Console]
+http://bitbucket-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com[Admin Console]
 
 Not only Bitbucket but also the additional plugins requires license, you can enable trial by the atlassian portal. 
 
@@ -14,19 +18,16 @@ Create a PVC and set to the container, so your configurations can survive to res
 
     oc set volume deployment/bitbucket --add --name=bitbucket-1 --type=persistentVolumeClaim --claim-name=bitbucket --mount-path=/var/atlassian/application-data/bitbucket
 
-http://bitbucket-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/plugins/servlet/oidc/emdisable?secret=udwujfiu6ch6gukqkuje6ssgwps7tq[Emergency Access]
+=== Credentials 
 
-Credentials
+Local
 
     username: rramalho
     password: redhat
 
-Login via RHSSO 
-
-    username: rodrigo
-    password: redhat
-
 === Plugins
+
+(DEPRECATED) Using Orange plugin instead.
 
 . Bitbucket Enterprise SSO with Keycloak 
 
@@ -35,20 +36,19 @@ image::images/bitbucket-keycloak-plugin.png[]
 
 == Install the RHSSO 7.3 from the official templates
 
-https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/[Admin Console]
-
-Credentials:
-
-    username: redhat
-    password: redhat
+https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/[Admin Console]
+https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/.well-known/openid-configuration
 
 RHSSO useful informations 
 
-    https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/.well-known/openid-configuration
-    auth url: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/auth
-    token_endpoint: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/token
-    logout url: https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/logout
-    user_info https://sso-apicurio.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/userinfo
+    "issuer": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat",
+    "authorization_endpoint": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/auth",
+    "token_endpoint": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/token",
+    "token_introspection_endpoint": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/token/introspect",
+    "userinfo_endpoint": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/userinfo",
+    "end_session_endpoint": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/logout",
+    "jwks_uri": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/certs",
+    "check_session_iframe": "https://sso-telecom.apps.cluster-latam-2fcf.latam-2fcf.example.opentlc.com/auth/realms/redhat/protocol/openid-connect/login-status-iframe.html",
 
 == Apicurio 
 
