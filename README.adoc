@@ -21,7 +21,7 @@ Create a PVC and set to the container, so your configurations can survive to res
 === Credentials 
 
 Local
-
+nopagados
     username: rramalho
     password: redhat
 
@@ -53,6 +53,26 @@ RHSSO useful informations
 == Apicurio 
 
 . First install the PostgreSQL 
+
+    oc new-app  --template=postgresql-persistent \
+                --param=POSTGRESQL_PASSWORD=redhat \
+                --param=POSTGRESQL_USER=redhat \
+                --param=POSTGRESQL_DATABASE=apicuriodb
+
+. Install Apicurio studio
+
+    oc new-app  --template=apicurio-studio \
+                --param=UI_ROUTE=apicurio-studio.apps.cluster-bd27.bd27.example.opentlc.com \
+                --param=API_ROUTE=apicurio-studio-api.apps.cluster-bd27.bd27.example.opentlc.com \
+                --param=WS_ROUTE=apicurio-studio-ws.apps.cluster-bd27.bd27.example.opentlc.com \
+                --param=AUTH_ROUTE=sso-bitbucket.apps.cluster-bd27.bd27.example.opentlc.com \
+                --param=DB_USER=redhat \
+                --param=DB_PASS=redhat \
+                --param=DB_NAME=apicuriodb \
+                --param=KC_REALM=apicurio \
+                --param=KC_USER=admin \
+                --param=KC_PASS=password 
+
 . After istall the Apicurio template `apicurio-template.yml`
 
 Remember to point to the Postgres and RHSSO already Installed. 
@@ -62,3 +82,6 @@ Remember to point to the Postgres and RHSSO already Installed.
 http://console-openshift-console.apps.cluster-latam-6b8a.latam-6b8a.example.opentlc.com[Openshift]
 
 All resources is on the project `apicurio`.
+
+
+amqp://messaging-b830662.redhat-rhmi-amq-online.svc:5672
